@@ -117,6 +117,15 @@ var defaultUtilsOutliner = "#outliner";
 			opMakeComment ();
 			}
 		}
+  function opGetRenderMode () {
+    return ($(defaultUtilsOutliner).concord ().op.getRenderMode ());
+    }
+  function opSetRenderMode (mode) {
+    return ($(defaultUtilsOutliner).concord ().op.setRenderMode (mode));
+    }
+  function opToggleRenderMode () {
+    opSetRenderMode (!opGetRenderMode ());
+    }
 	function opCollapseEverything () {
 		return ($(defaultUtilsOutliner).concord().op.fullCollapse());
 		}
@@ -198,10 +207,10 @@ var defaultUtilsOutliner = "#outliner";
 			headers: headerval,
 			timeout: 30000 
 			}) 
-		.success (function (data, status) { 
+		.done (function (data, status) {
 			callback (data, op);
 			}) 
-		.error (function (status) { 
+		.fail (function (status) {
 			httpReadStatus = status;
 			});
 		}

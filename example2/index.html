@@ -4,9 +4,9 @@
 		<title>Example 2</title>
 		<meta name="copyright" content="Copyright 2013-2014, Small Picture, Inc.">
 		
-		<script src="../libraries/jquery-1.9.1.min.js"></script>  
-		<link href="../libraries/bootstrap.css" rel="stylesheet">
-		<script src="../libraries/bootstrap.min.js"></script>
+		<script src="../libraries/jquery-3.7.1.min.js"></script>
+		<link href="../libraries/bootstrap-5.3.3.css" rel="stylesheet">
+		<script src="../libraries/bootstrap-5.3.3.min.js"></script>
 		<link rel="stylesheet" href="../libraries/fontAwesome/css/all.css">
 		<script src="../concordutils.js"></script>
 		<link rel="stylesheet" href="../concordstyles.css">
@@ -145,7 +145,7 @@
 				var waitingstyle = " style='color: green;'";
 				var style = (flUpdateWaiting) ? waitingstyle : "";
 				
-				document.getElementById ("idLockIcon").innerHTML = "<i class=\"icon-" + iconname + "\"" + style + "></i>";
+				document.getElementById ("idLockIcon").innerHTML = "<i class=\"fas fa-" + iconname + "\"" + style + "></i>";
 				
 				var tip = (appPrefs.flLocked) ? "Unlock to allow updates." : "Lock the outline while you're reading.";
 				document.getElementById ("idLinkToLockIcon").title = tip;
@@ -202,7 +202,7 @@
 					dataType: "text",
 					timeout: 30000
 					})
-				.success (function (data, status, xhr) {
+				.done (function (data, status, xhr) {
 					if (xhr.status==200) {
 						if (data != lastOpmltext) {
 							if (appPrefs.flLocked && flOutlineDisplayed) {
@@ -220,7 +220,7 @@
 						flStartedUp = true;
 						}
 					})
-				.error (function (status, textStatus, errorThrown) {
+				.fail (function (status, textStatus, errorThrown) {
 					console.log ("checkOutline: error == " + errorThrown + ", status == " + textStatus);
 					});
 				}
@@ -283,15 +283,6 @@
 				setInterval (function () {backgroundProcess (); }, 1000);
 				}
 			</script>
-		<script> /* google analytics code */
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-			
-			ga('create', appConsts.analyticsAccount, appConsts.domain);
-			ga('send', 'pageview');
-			</script>
 		<style>
 			body {
 				background-color: #fdfdfa;
@@ -344,41 +335,54 @@
 			</style>
 		</head>
 	<body>
-		<aside class="leftSidebar">
-			<div style="margin-top: 40px;">
-				<center>
-					<div class="divIcon"><a href="http://fargo.io/" target="_blank" title="Use Fargo to create your own outlines."><i class="icon-home"></i></a></div>
-					<div class="divIcon"><a id="idTwitterIntentLink" target="_blank" title="Tweet a link to this outline."><i class="icon-twitter"></i></a></div>
-					<div class="divIcon"><a href="#" id="idLinkToLockIcon" onclick="toggleLocked ();"><span id="idLockIcon"></span></a></div>
-					</center>
-				</div>
-			</aside>
-		<div class="bs-docs-grid" id="idSmallPicturePage">
-			<div class="row-fluid show-grid" style="margin-top: 40px; margin-bottom: 200px;">
-				<div class="span2">
-					&nbsp;
-					</div>
-				<div class="span8" style="margin-left: 0;">
-					<hr id="idTopLine" style="margin-top: 0; margin-bottom: 10px; visibility: hidden;">
-					<h2 id="idTitle"></h2>
-					<span id="idDescription"></span>
-					<hr id="idBottomLine" style="margin-top: 10px; margin-bottom: 10px; visibility: hidden;">
-					<div class="divByLine" id="idByline" style="margin-bottom: 40px; visibility: hidden;"><span id="idOwnerName"></span><span id="idModDate"></span>.</div>
-					<div class="divMyOutline">
-						<div id="outliner"></div>
-						</div>
-					<div class="divFootnote" id="idFootnote" style="visibility: hidden;">
-						<hr style="margin-top: 60px; margin-bottom: 5px;">
-						<div style="float: right;"><i><span id="idVersion"></span></i></div>
-						<i>Small Picture Reader</i> is an easy way to publish outlines created in <a href="http://fargo.io/" target="_blank">Fargo</a>. &copy; 2013 <a href="http://smallpicture.com/" target="_blank">Small Picture</a>, Inc.
-						<hr style="margin-top: 5px; margin-bottom: 30px;">
-						</div>
-					</div>
-				<div class="span2">
-					&nbsp;
-					</div>
-				</div>
-			</div>
+    <aside class="leftSidebar">
+      <div class="mt-4 text-center">
+        <div class="divIcon">
+          <a href="http://fargo.io/" target="_blank" title="Use Fargo to create your own outlines.">
+            <i class="fas fa-home"></i>
+            </a>
+          </div>
+        <div class="divIcon">
+          <a id="idTwitterIntentLink" target="_blank" title="Tweet a link to this outline.">
+            <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        <div class="divIcon">
+          <a href="#" id="idLinkToLockIcon" onclick="toggleLocked();">
+            <span id="idLockIcon"></span>
+            </a>
+          </div>
+        </div>
+      </aside>
+    <div class="container" id="idSmallPicturePage">
+      <div class="row g-3 my-4">
+        <div class="col-2">
+          &nbsp;
+          </div>
+        <div class="col-8">
+          <hr id="idTopLine" class="my-2" style="visibility: hidden;">
+          <h2 id="idTitle"></h2>
+          <span id="idDescription"></span>
+          <hr id="idBottomLine" class="my-2" style="visibility: hidden;">
+          <div class="divByLine" id="idByline" style="margin-bottom: 40px; visibility: hidden;">
+            <span id="idOwnerName"></span>
+            <span id="idModDate"></span>.
+            </div>
+          <div class="divMyOutline">
+            <div id="outliner"></div>
+            </div>
+          <div class="divFootnote" id="idFootnote" style="visibility: hidden;">
+            <hr class="my-1">
+            <div class="float-end"><i><span id="idVersion"></span></i></div>
+            <i>Small Picture Reader</i> is an easy way to publish outlines created in <a href="http://fargo.io/" target="_blank">Fargo</a>. &copy; 2013 <a href="http://smallpicture.com/" target="_blank">Small Picture</a>, Inc.
+            <hr class="my-3">
+            </div>
+          </div>
+        <div class="col-2">
+          &nbsp;
+          </div>
+        </div>
+      </div>
 		<div id="idErrorMessage"></div>
 		<script>
 			$(document).ready (function () {
